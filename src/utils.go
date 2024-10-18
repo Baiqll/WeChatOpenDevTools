@@ -1,4 +1,4 @@
-package utils
+package src
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-//go:embed script/hook.js
+//go:embed hook.js
 var jsFile embed.FS
 
 type Message struct {
@@ -33,12 +33,12 @@ func GetWeChatAppExPID()(pid int,err error){
 
 }
 
-
 func GetHookScript()(script string,err error){
 
 	
 	// 使用embed包提供的文件系统访问嵌入的文件
-	file, err := jsFile.Open("script/hook.js")
+	file, err := jsFile.Open("hook.js")
+
 	if err != nil {
 		return
 	}

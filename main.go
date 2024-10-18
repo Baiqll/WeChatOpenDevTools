@@ -7,6 +7,7 @@ import (
 	"os"
 
 	utils "github.com/baiqll/wechatopendevtools/src"
+
 	"github.com/frida/frida-go/frida"
 )
 
@@ -54,15 +55,18 @@ import (
 		var customMsg  utils.Message
 
 		err := json.Unmarshal([]byte(message), &customMsg)
+
 		if err != nil {
 			fmt.Println("[-] ", "消息错误")
 			os.Exit(1)
 		}
 
 		if customMsg.Type == "send"{
+
 			fmt.Println("[*] ", customMsg.Payload)
 		}else{
 			fmt.Println("[-] ", customMsg.Payload)
+
 		}
 	  
 	})
