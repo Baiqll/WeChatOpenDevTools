@@ -37,7 +37,6 @@ import (
 		os.Exit(1)
 	}
 
-
 	session, err := localDevice.Attach(wechataexp_id, nil)
 	if err != nil {
 		fmt.Println("[-] ", "Attach 错误")
@@ -50,20 +49,20 @@ import (
 	  os.Exit(1)
 	}
   
-	script.On("message", func(message interface{}) {
+	script.On("message", func(message string) {
 
 		var customMsg  utils.Message
 
-		err := json.Unmarshal([]byte(message.(string)), &customMsg)
+		err := json.Unmarshal([]byte(message), &customMsg)
 		if err != nil {
 			fmt.Println("[-] ", "消息错误")
 			os.Exit(1)
 		}
 
 		if customMsg.Type == "send"{
-			fmt.Println("[*] ", customMsg.Msg)
+			fmt.Println("[*] ", customMsg.Payload)
 		}else{
-			fmt.Println("[-] ", customMsg.Msg)
+			fmt.Println("[-] ", customMsg.Payload)
 		}
 	  
 	})

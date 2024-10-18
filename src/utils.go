@@ -5,27 +5,29 @@ import (
 	"embed"
 	"io/ioutil"
 	"os/exec"
-	"strings"
+	"regexp"
+	"strconv"
 )
 
+//go:embed script/hook.js
+var jsFile embed.FS
 
 type Message struct {
 	Type string
-	Msg  string
+	Payload  string
 }
 
-func GetWeChatAppExPID()(pid string,err error){
+func GetWeChatAppExPID()(pid int,err error){
 
 	command := "ps aux | grep 'WeChatAppEx' |  grep -v 'grep' | grep ' --client_version' | grep '-user-agent=' | awk '{print $2}' | tail -n 1"
 
-	parts := strings.Fields(command)
-
-	cmd := exec.Command(parts[0], parts[1:]...)
+	cmd := exec.Command("sh", "-c", command)
 	var out bytes.Buffer
 	cmd.Stdout = &out
-	err = cmd.Run()
-	
-	pid = out.String()
+	cmd.Run()
+	re := regexp.MustCompile(`[\s\n\t]+`)
+
+	pid, err = strconv.Atoi(re.ReplaceAllString(out.String(), ""))
 
 	return 
 
@@ -34,10 +36,9 @@ func GetWeChatAppExPID()(pid string,err error){
 
 func GetHookScript()(script string,err error){
 
-	var jsFile embed.FS
-
+	
 	// 使用embed包提供的文件系统访问嵌入的文件
-	file, err := jsFile.Open("js/script.js")
+	file, err := jsFile.Open("script/hook.js")
 	if err != nil {
 		return
 	}

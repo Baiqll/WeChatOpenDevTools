@@ -2,11 +2,18 @@
 var module = Process.findModuleByName("WeChatAppEx Framework");
 var base = module.base;
 
+// var address = {
+//   enableVconsole: "0x25505f8",
+//   setupInterceptor: "0x23f028c",
+//   adevTools: "0x6c219f8",
+//   version: "WeChat v3.8.8.18",
+// };
+
 var address = {
-  enableVconsole: "0x25505f8",
-  setupInterceptor: "0x23f028c",
-  adevTools: "0x6c219f8",
-  version: "WeChat v3.8.8.18",
+  enableVconsole: "0x2550414",
+  setupInterceptor: "0x23f00a8",
+  adevTools: "0x6c218f8",
+  version: "WeChat v3.8.9",
 };
 
 send("WeChatAppEx 注入成功!");
