@@ -1,6 +1,6 @@
 # WeChatOpenDevTools
 
-微信 强开 DevTools
+微信 Mac arm DevTools
 
 ### **注意本库只能作为学习用途, 造成的任何问题与本库开发者无关, 如侵犯到你的权益，请联系删除。**
 
